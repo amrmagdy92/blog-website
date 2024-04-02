@@ -7,7 +7,7 @@ import cors from "cors"
 import mongoose from "mongoose"
 import expressRateLimiter from "express-rate-limit"
 
-import postsRouter from "./routes/posts.js"
+import postsRouter from "./router/posts.router"
 
 dotenv.config()
 
