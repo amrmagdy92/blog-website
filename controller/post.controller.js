@@ -1,6 +1,6 @@
-import { resolve } from "path"
 import { validatePostData } from "../helpers/post.helpers"
 import postModel from "../model/post.model"
+import { isValidObjectId } from "mongoose"
 
 const createPost = (post) => {
     return new Promise((resolve, reject) => {
@@ -77,33 +77,40 @@ const listPosts = (resultsPerPage, pageNumber) => {
 }
 const updatePost = (postID, updateData) => {
     return new Promise((resolve, reject) => {
-        let errors = validatePostData(updateData)
-        if (Object.keys(errors).length > 0) {
+        if (!isValidObjectId(postID)) {
             reject({
                 code: 400,
-                msg: errors
+                msg: 'Invalid post'
             })
         } else {
-            postModel.findById(postID, updateData)
-            .then(data => {
-                if (data) {
-                    resolve({
-                        code: 200,
-                        msg: data
-                    })
-                } else {
-                    reject({
-                        code: 404,
-                        msg: 'Post not found'
-                    })
-                }
-            })
-            .catch(err => {
+            let errors = validatePostData(updateData)
+            if (Object.keys(errors).length > 0) {
                 reject({
-                    code: 500,
-                    msg: err
+                    code: 400,
+                    msg: errors
                 })
-            })
+            } else {
+                postModel.findById(postID, updateData)
+                .then(data => {
+                    if (data) {
+                        resolve({
+                            code: 200,
+                            msg: data
+                        })
+                    } else {
+                        reject({
+                            code: 404,
+                            msg: 'Post not found'
+                        })
+                    }
+                })
+                .catch(err => {
+                    reject({
+                        code: 500,
+                        msg: err
+                    })
+                })
+            }
         }
     })
 }
