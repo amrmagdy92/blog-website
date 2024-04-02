@@ -11,7 +11,7 @@ const createPost = (post) => {
                 msg: errors
             })
         } else {
-            postModel.createPost()
+            postModel.create(post)
             .then(data => resolve({
                 code: 200,
                 msg: data
@@ -84,7 +84,7 @@ const updatePost = (postID, updateData) => {
                 msg: errors
             })
         } else {
-            postModel.findByI(postID, updateData)
+            postModel.findById(postID, updateData)
             .then(data => {
                 if (data) {
                     resolve({
