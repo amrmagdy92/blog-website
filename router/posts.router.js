@@ -6,7 +6,7 @@ const router = Router()
 
 router.route("/")
     .get((request,response) => {
-        listPosts(request.body.resultsPerPage, request.body.pageNumber)
+        listPosts(request.query.resultsPerPage, request.query.pageNumber)
         .then(result => {
             let responseCode = result.code
             let resultData = result.msg
