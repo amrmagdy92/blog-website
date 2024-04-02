@@ -7,6 +7,8 @@ import cors from "cors"
 import mongoose from "mongoose"
 import expressRateLimiter from "express-rate-limit"
 
+import postsRouter from "./routes/posts.js"
+
 dotenv.config()
 
 const app = express()
@@ -61,5 +63,7 @@ app.use((err, req, res, next) => {
 app.get('/',(req, res) => {
     res.send("Hello")
 })
+
+app.use('/api/v1/posts', postsRouter)
 
 export default app
