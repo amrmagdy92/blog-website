@@ -34,9 +34,14 @@ const viewPost = (postID) => {
             postModel.findById(postID)
             .then(data => {
                 if (data) {
+                    let post = {
+                        title: data.title,
+                        postText: data.postText,
+                        postImage: data.postImage || undefined
+                    }
                     resolve({
                         code: 200,
-                        msg: data
+                        msg: post
                     })
                 } else {
                     reject({
