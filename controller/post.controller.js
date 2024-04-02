@@ -25,26 +25,33 @@ const createPost = (post) => {
 }
 const viewPost = (postID) => {
     return new Promise((resolve, reject) => {
-        postModel.findById(postID)
-        .then(data => {
-            if (data) {
-                resolve({
-                    code: 200,
-                    msg: data
-                })
-            } else {
-                reject({
-                    code: 404,
-                    msg: 'Post not found'
-                })
-            }
-        })
-        .catch(err => {
+        if (!isValidObjectId(postID)) {
             reject({
-                code: 500,
-                msg: err
+                code: 400,
+                msg: 'Invalid post'
             })
-        })
+        } else {
+            postModel.findById(postID)
+            .then(data => {
+                if (data) {
+                    resolve({
+                        code: 200,
+                        msg: data
+                    })
+                } else {
+                    reject({
+                        code: 404,
+                        msg: 'Post not found'
+                    })
+                }
+            })
+            .catch(err => {
+                reject({
+                    code: 500,
+                    msg: err
+                })
+            })
+        }
     })
 }
 const listPosts = (resultsPerPage, pageNumber) => {
