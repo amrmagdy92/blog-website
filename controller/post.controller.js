@@ -114,6 +114,29 @@ const updatePost = (postID, updateData) => {
         }
     })
 }
-const deletePost = () => {}
+const deletePost = (postID) => {
+    return new Promise((resolve, reject) => {
+        if (isValidObjectId(postID)) {
+            postModel.findByIdAndDelete(postID)
+            .then(() => {
+                resolve({
+                    code: 200,
+                    msg: 'Post deleted successfully'
+                })
+            })
+            .catch( error => {
+                reject({
+                    code: 500,
+                    msg: error
+                })
+            })
+        } else {
+            reject({
+                code: 400,
+                msg: "Invalid post"
+            })
+        }
+    })
+}
 
 export { createPost, viewPost, listPosts, updatePost, deletePost }
