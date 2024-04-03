@@ -32,6 +32,7 @@ const viewPost = (postID) => {
             })
         } else {
             postModel.findById(postID)
+            .populate("authorID")
             .then(data => {
                 if (data) {
                     let post = {
@@ -71,6 +72,7 @@ const listPosts = (resultsPerPage, pageNumber) => {
                 skip: resultsPerPage * (pageNumber - 1),
                 limit: resultsPerPage
             })
+            .populate("authorID")
             .then(results => {
                 if (results.length > 0) {
                     resolve({
