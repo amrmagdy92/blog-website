@@ -1,4 +1,5 @@
 import crypto from "crypto"
+import { isValidObjectId } from "mongoose"
 
 const makeSalt = () => {
     return Math.round(new Date().valueOf() * Math.random()).toString()
@@ -24,6 +25,16 @@ const validateUser = (user) => {
     return errors
 }
 
+const validateUpdateData = (userID, userData) => {
+    let errors = {}
+    let validKeys = ["firstName", "lastName", "email"]
+    !isValidObjectId(userID) ? errors.user_id = "Invalid user ID" : null
+    for ( let i = 0; i < Object.keys(userData).length; i++ ) {
+        !validKeys.includes(Object.keys(userData)[i]) ? errors.invalid_key = "An invalid key was found" : null
+    }
+    return errors
+} 
+
 const cleanUserData = (user) => {
     return {
         firstName: user.firstName,
@@ -47,5 +58,6 @@ export {
     makeSalt,
     encryptPassword,
     validateUser,
+    validateUpdateData,
     cleanUserData
 }
