@@ -62,7 +62,7 @@ app.use((err, req, res, next) => {
 })
 
 app.get('/',(req, res) => {
-    res.send("Hello")
+    res.send("hello")
 })
 
 app.use('/api/v1/users', usersRouter)
