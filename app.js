@@ -9,6 +9,7 @@ import expressRateLimiter from "express-rate-limit"
 
 import usersRouter from "./router/users.router"
 import postsRouter from "./router/posts.router"
+import contactFormRouter from "./router/contact_form.router"
 
 dotenv.config()
 
@@ -67,5 +68,6 @@ app.get('/',(req, res) => {
 
 app.use('/api/v1/users', usersRouter)
 app.use('/api/v1/posts', postsRouter)
+app.use('/api/v1/contact', contactFormRouter)
 
 export default app
