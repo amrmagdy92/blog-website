@@ -1,4 +1,5 @@
 import { isValidObjectId } from "mongoose"
+import { cleanseTicket } from "../helpers/ticket.helper"
 import contactFormModel from "../model/contact_form.model"
 
 const createContactTicket = (ticketData) => {
@@ -48,7 +49,7 @@ const readContactTicket = (ticketID) => {
                 if (ticket) {
                     resolve({
                         code: 200,
-                        msg: ticket
+                        msg: cleanseTicket(ticket)
                     })
                 } else {
                     reject({
