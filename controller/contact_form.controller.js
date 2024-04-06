@@ -17,7 +17,7 @@ const createContactTicket = (ticketData) => {
                 if (ticket) {
                     resolve({
                         code: 200,
-                        msg: ticket
+                        msg: "Ticket has been created successfully"
                     })
                 } else {
                     reject({
