@@ -21,7 +21,7 @@ const validateUser = (user) => {
     !user.firstName || user.firstName == ""? errors.firstName = "First name is required" : null
     !user.lastName || user.lastName == ""? errors.lastName = "Last name is required" : null
     !user.password || user.password == ""? errors.password = "Password is required" : null
-    !user.email || user.email == "" || /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(this.email)? errors.email = "User email is not valid" : null
+    !user.email || user.email == "" || !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(user.email)? errors.email = "User email is not valid" : null
     return errors
 }
 
