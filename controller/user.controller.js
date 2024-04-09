@@ -20,7 +20,7 @@ const createUser = (userData) => {
                 hashedPassword: encryptPassword(userData.password, userSalt),
                 userSalt: userSalt
             }).then( user => {
-                let cleansedUser = cleanUserData()
+                let cleansedUser = cleanUserData(user)
                 resolve({
                     code: 201,
                     msg: cleansedUser
