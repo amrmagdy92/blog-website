@@ -39,10 +39,13 @@ const configuredCors = cors({
 })
 
 const configuredRateLimiter = expressRateLimiter({
-    window: 30*1000,
+    window: 10*1000,
     max: 10,
     message: "You've requested this site too frequently.\nPlease wait for a while before making a new request.",
-    Headers: true
+    Headers: true,
+    keyGenerator: (req, res) => {
+        return req.ip
+    }
 })
 
 app.use(configuredBodyParserJSON)
