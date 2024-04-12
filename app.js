@@ -7,7 +7,7 @@ import cors from "cors"
 import mongoose from "mongoose"
 import expressRateLimiter from "express-rate-limit"
 
-import usersRouter from "./router/users.router"
+// import usersRouter from "./router/users.router"
 import postsRouter from "./router/posts.router"
 import contactFormRouter from "./router/contact_form.router"
 
@@ -66,7 +66,7 @@ app.get('/',(req, res) => {
     res.send("hello")
 })
 
-app.use('/api/v1/users', usersRouter)
+// app.use('/api/v1/users', usersRouter)
 app.use('/api/v1/posts', postsRouter)
 app.use('/api/v1/contact', contactFormRouter)
 
