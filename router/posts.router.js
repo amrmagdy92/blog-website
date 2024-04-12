@@ -10,7 +10,7 @@ router.route("/")
         .then(result => {
             let responseCode = result.code
             let resultData = result.msg
-            response.status(responseCode).json({ msg: resultData })
+            response.status(responseCode).render('post.ejs', { data: resultData })
         })
         .catch(err => {
             let responseCode = err.code
