@@ -51,6 +51,7 @@ app.use(configuredCompress)
 app.use(configuredHelmet)
 app.use(configuredCors)
 app.use(configuredRateLimiter)
+app.set('view engine', 'ejs')
 
 // TODO: Add better UX for the below error handling
 app.use((err, req, res, next) => {
