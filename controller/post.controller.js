@@ -152,5 +152,36 @@ const deletePost = (postID) => {
         }
     })
 }
+const fetchDevPosts = (resultsPerPage, pageNumber) => {
+    return new Promise((resolve, reject) => {
+        if (isNaN(resultsPerPage) || isNaN(pageNumber)) {
+            reject({
+                code: 400,
+                msg: 'Invalid parameters'
+            })
+        } else {
+            fetch(process.env.DEV_POSTS_URL)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    resolve({
+                        code: 200,
+                        msg: data
+                    })
+                } else if (data.length === 0) {
+                    reject({
+                        code: 404,
+                        msg: "Posts not found"
+                    })
+                }
+            }).catch(err => {
+                reject({
+                    code: 500,
+                    msg: err
+                })
+            })
+        }
+    })
+}
 
-export { createPost, viewPost, listPosts, updatePost, deletePost }
+export { createPost, viewPost, listPosts, updatePost, deletePost, fetchDevPosts }

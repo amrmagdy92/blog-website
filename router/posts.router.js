@@ -1,12 +1,12 @@
 import { Router } from "express"
 
-import { createPost, deletePost, listPosts, updatePost, viewPost } from "../controller/post.controller"
+import { createPost, deletePost, fetchDevPosts, updatePost, viewPost } from "../controller/post.controller"
 
 const router = Router()
 
 router.route("/")
     .get((request,response) => {
-        listPosts(request.query.resultsPerPage, request.query.pageNumber)
+        fetchDevPosts(request.query.resultsPerPage, request.query.pageNumber)
         .then(result => {
             let responseCode = result.code
             let resultData = result.msg
